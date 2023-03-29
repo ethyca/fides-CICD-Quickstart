@@ -15,8 +15,9 @@ jobs:
     container:
       image: ethyca/fides:latest
     steps:
-      - name: Dry Evaluation
+      - name: Checkout Repository
         uses: actions/checkout@v2
+      - name: Dry Evaluation
         run: fides evaluate --dry .fides/
         env:
           FIDES__CLI__SERVER_HOST: "fides.privacyco.com"
