@@ -1,0 +1,22 @@
+name: Fides CI
+
+# Only check on Pull Requests that target main
+on:
+  pull_request:
+    branches:
+      - main
+    paths: # Only run checks when the resource files change or the workflow file changes
+      - .fides/**
+      - .github/workflows/fides_ci.yml
+
+jobs:
+  fides_ci:
+    runs-on: ubuntu-latest
+    container:
+      image: ethyca/fides:latest
+    steps:
+      - name: Dry Evaluation
+        uses: actions/checkout@v2
+        run: fides evaluate --dry .fides/
+        env:
+          FIDES__CLI__SERVER_HOST: "fides.privacyco.com"
