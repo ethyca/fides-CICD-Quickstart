@@ -87,6 +87,6 @@ jobs:
           conn.close()
           "
       - name: Scan Database and validate that all fields are accounted for
-        run: fides scan dataset db --connection-string postgres://postgres:postgres@localhost:5433/postgres_example
+        run: fides scan dataset db --connection-string postgresql://postgres:postgres@localhost:5433/postgres_example
       - name: Evaluation
         run: fides evaluate .fides/
