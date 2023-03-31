@@ -1,0 +1,38 @@
+services:
+
+  ################################################
+  # Webapplication to simulate your application!
+  ################################################
+
+  sample-app:
+    image: ethyca/fides-sample-app:2.9.1
+    environment:
+      - PORT=3000
+      - DATABASE_HOST=postgres-test
+      - DATABASE_PORT=5432
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_DB=postgres_example
+
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres-test
+
+  postgres-test:
+    image: postgres:12
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "postgres_example"
+    volumes:
+      - ./database/migrations/postgres_sample.sql:/docker-entrypoint-initdb.d/postgres_sample.sql:ro
+
+volumes:
+  postgres: null
+  postgres-test: null
