@@ -64,7 +64,7 @@ jobs:
           from psycopg2 import sql
 
           DB_HOST = 'localhost'
-          DB_PORT = 5432
+          DB_PORT = 5433
           DB_USER = 'postgres'
           DB_PASSWORD = 'postgres'
           DB_NAME = 'sample_db'
@@ -87,6 +87,6 @@ jobs:
           conn.close()
           "
       - name: Scan Database and validate that all fields are accounted for
-        run: fides scan dataset db --connection-string postgres://postgres:postgres@localhost:5432/postgres_example
+        run: fides scan dataset db --connection-string postgres://postgres:postgres@localhost:5433/postgres_example
       - name: Evaluation
         run: fides evaluate .fides/
