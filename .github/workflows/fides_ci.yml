@@ -26,7 +26,7 @@ jobs:
       fides:
         image: ethyca/fides
         env:
-          FIDES__DATABASE__SERVER: postgres://postgres:postgres@localhost:5432/fides
+          FIDES__DATABASE__SERVER: postgres://postgres:postgres@localhost:5432
           FIDES__DATABASE__USER: postgres
           FIDES__DATABASE__PASSWORD: postgres
           FIDES__DATABASE__PORT: 5432
