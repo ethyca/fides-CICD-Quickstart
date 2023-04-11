@@ -17,7 +17,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: sample_db
         ports:
-          - 5433:5432
+          - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
       # For the purposes of this example, we are hosting a Fides Server in this CI job
@@ -64,7 +64,7 @@ jobs:
           from psycopg2 import sql
 
           DB_HOST = 'localhost'
-          DB_PORT = 5433
+          DB_PORT = 5432
           DB_USER = 'postgres'
           DB_PASSWORD = 'postgres'
           DB_NAME = 'sample_db'
@@ -87,6 +87,6 @@ jobs:
           conn.close()
           "
       - name: Scan Database and validate that all fields are accounted for
-        run: fides --local scan dataset db --connection-string postgresql://postgres:postgres@localhost:5433/postgres_example
+        run: fides --local scan dataset db --connection-string postgresql://postgres:postgres@localhost:5432/postgres_example
       - name: Evaluation
         run: fides --local evaluate .fides/
