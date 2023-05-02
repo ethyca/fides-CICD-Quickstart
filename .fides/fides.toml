@@ -1,0 +1,28 @@
+# [database]
+# server = "fidesplus-db"
+# port = "5432"
+# user = "postgres"
+# password = "fides"
+# db = "fides"
+
+[redis]
+enabled = false
+
+# [logging]
+# level = "INFO"
+# log_pii = true
+
+# [execution]
+# masking_strict = false
+# require_manual_request_approval = true
+# subject_identity_verification_required = false
+
+# [security]
+# cors_origins = [ "http://localhost:8080", "http://localhost:3001", ]
+
+[cli]
+# server_host = "localhost"
+# server_port = 8080
+
+[user]
+analytics_opt_out = true
