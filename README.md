@@ -10,7 +10,11 @@ Fides (pronounced */fee-dhez/*, from Latin: Fidēs) is an open-source privacy en
 
 ### Getting Started 
 
-This repo serves as a full fledged example on how Fides can be used in CI/CD pipelines. In this example, we show a flow where a database is built in CI and migrations are performed against it.
+This repository provides a comprehensive example of a fictional ecommerce site for a CookieHouse, showcasing how Fides can be integrated into CI/CD pipelines to ensure privacy and regulatory compliance. The example consists of a turn-key solution, demonstrating the full process from building a database in CI to performing migrations against it. The CookieHouse example serves as a practical guide to understand how Fides can be applied in real-world scenarios.
+
+In addition to this turn-key example, another repository will be available as a lab to help users set up their own CI/CD pipelines using Fides. By following the lab, you can learn how to establish a CI/CD pipeline tailored to your specific requirements while ensuring that privacy regulations are enforced in your code.
+
+The Fides platform is designed to help organizations manage and fulfill Data Mapping, Consent, and Data Privacy Requests while staying compliant with various privacy regulations. By using Fides in your CI/CD pipeline, you can ensure that your company remains compliant, reducing the risk of privacy breaches and potential fines.
 
 #### Minimum requirements
 
