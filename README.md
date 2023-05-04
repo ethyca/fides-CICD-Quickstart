@@ -1,4 +1,4 @@
-# Fides CI/CD Quickstart
+# Fides CI/CD Turnkey Quickstart
 
 ![Fides banner](https://github.com/ethyca/fides/blob/main/docs/fides/docs/img/fides-banner.png "Fides banner")
 
@@ -6,7 +6,7 @@
 
 Fides (pronounced */fee-dhez/*, from Latin: Fidēs) is an open-source privacy engineering platform for managing the fulfillment of data privacy requests in your runtime environment, and the enforcement of privacy regulations in your code.
 
-## :rocket: Quick Start
+## :rocket: Turnkey Quick Start
 
 ### Getting Started 
 
