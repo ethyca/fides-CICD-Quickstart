@@ -61,36 +61,9 @@ jobs:
       - name: Install Fides
         run: pip install ethyca-fides==2.12.0
 
+      # Set up the data in the database
       - name: Run Database Migrations
-        run: |
-          python -c "
-          import os
-          import psycopg2
-          from psycopg2 import sql
-
-          DB_HOST = 'localhost'
-          DB_PORT = 5432
-          DB_USER = 'postgres'
-          DB_PASSWORD = 'postgres'
-          DB_NAME = 'sample_db'
-
-          conn = psycopg2.connect(
-              dbname=DB_NAME,
-              user=DB_USER,
-              password=DB_PASSWORD,
-              host=DB_HOST,
-              port=DB_PORT
-          )
-
-          with open('database/migrations/postgres_sample.sql', 'r') as f:
-              sql_script = f.read()
-
-          with conn.cursor() as cursor:
-              cursor.execute(sql_script)
-              conn.commit()
-
-          conn.close()
-          "
+        run: python db_migrations.py
 
       # We pureposefully show errors/missed columns here
       - name: Scan Database and Validate that all Fields are Accounted for
