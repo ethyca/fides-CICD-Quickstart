@@ -1,6 +1,6 @@
 dataset:
   - fides_key: cookiehouse_core
-    name: Cookie House Core Dataset
+    name: public
     description: Example of a Postgres dataset containing a variety of related tables like customers, products, addresses, etc.
     collections:
       - name: address
