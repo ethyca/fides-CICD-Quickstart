@@ -86,6 +86,14 @@ The following fields are missing data category annotations:
 Annotation coverage: 82%
 ```
 
+  6. **Evaluation:** Performs a Privacy Policy Evaluation using Fides. This step runs the command `fides --local evaluate` and the evaluation process uses the `policy.yml` to validate that data annotated in `cookiehouse_core.yml` are compliant. An Example output is shown below:
+
+```
+
+```
+  
+  
+
 ## :bulb: Additional Information
 
 ### Documentation
