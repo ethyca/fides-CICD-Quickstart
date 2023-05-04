@@ -25,9 +25,31 @@ The Fides platform is designed to help organizations manage and fulfill Data Map
 
 ### Repository Structure
 
-#### .fides - The `.fides` folder is required for each repository for privacy checks.
+```
+.
+├── .fides
+│   ├── cookiehouse_core.yml
+│   ├── fides.toml
+│   └── policy.yml
+├── .github
+│   └── workflows
+│       └── fides_ci.yml
+├── README.md
+├── database
+│   └── migrations
+│       └── postgres_sample.sql
+├── db_migration.py
+└── docker-compose.yml
 
- This folder acts as a place where all Fides and repo specific configurations live. This can include:
+```
+
+### .fides
+------
+
+
+The `.fides` folder is required for each repository for privacy checks.
+
+This folder acts as a place where all Fides and repo specific configurations live. This can include:
   1. The Database Privacy Declarations known as a [Dataset](https://docs.ethyca.com/fides/dsr_quickstart/dsr_support/datasets)  (`cookiehouse_core.yml`). This can be autocompleted using Fide's AI Classification tools or an empty skeleton can be generated using [Fides Generate](https://docs.ethyca.com/fides/cli_support/generate_resources#command-line)
 
   2. The initial fides configurations (`fides.toml`)
@@ -36,7 +58,10 @@ The Fides platform is designed to help organizations manage and fulfill Data Map
   
 The privacy declarations and privacy policy use [FidesLang Taxonomy](https://ethyca.github.io/fideslang/explorer/), the universal privacy language of the web!
 
-#### .github/workflows - This contains the CI job that will perform the migration and perform the privacy checks
+### .github/workflows
+------
+
+This folder contains the CI job that will perform the migration and perform the privacy checks
 
 The example CI job performs the following steps:
   1. **Checkout:** Retrieves the source code for the repository using the actions/checkout action. 
