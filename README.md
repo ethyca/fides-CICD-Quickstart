@@ -21,6 +21,12 @@ The Fides platform is designed to help organizations manage and fulfill Data Map
 * [Docker](https://www.docker.com/products/docker-desktop) (version 20.10.11 or later)
 * [Python](https://www.python.org/downloads/) (version 3.8 through 3.10)
 
+#### Repo Structure
+
+1. `.fides` - This folder acts as a place where all Fides and repo specific configurations live. This can include the Database privacy declarations (`cookiehouse_core.yml`), the initial fides configurations (`fides.toml`), and a codified version of your privacy policy (`policy.yml`).
+
+2.
+
 ### Documentation
 
 For more information on getting started with Fides, how to configure and set up Fides, and more about the Fides ecosystem of open source projects:
