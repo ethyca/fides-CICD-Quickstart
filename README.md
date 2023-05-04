@@ -29,7 +29,9 @@ The Fides platform is designed to help organizations manage and fulfill Data Map
 
  This folder acts as a place where all Fides and repo specific configurations live. This can include:
   1. The Database Privacy Declarations known as a [Dataset](https://docs.ethyca.com/fides/dsr_quickstart/dsr_support/datasets)  (`cookiehouse_core.yml`). This can be autocompleted using Fide's AI Classification tools or an empty skeleton can be generated using [Fides Generate](https://docs.ethyca.com/fides/cli_support/generate_resources#command-line)
+
   2. The initial fides configurations (`fides.toml`)
+
   3. A codified version of your privacy policy (`policy.yml`)
   
 The privacy declarations and privacy policy use [FidesLang Taxonomy](https://ethyca.github.io/fideslang/explorer/), the universal privacy language of the web!
@@ -44,7 +46,19 @@ The example CI job performs the following steps:
   5. **Scan Database and Validate that all fields are Accounted for:** This is the first step to validate that you are in compliance. The `fides --local scan dataset db` command checks to see if any net-new fields were introduced into the database but weren't annotated in `cookiehouse_core.yml`. This outputs a report that shows what is missing and what your percent privacy coverage is. An example report is below:
 
 ```
+Loading resource manifests from: .fides/
+Taxonomy successfully created.
+Loaded the following dataset manifests:
+	cookiehouse_core
+Successfully scanned the following datasets:
+	public
 
+The following fields are missing data category annotations:
+	public.users.name
+ public.users.phone
+ public.orders.billingAddress
+
+Annotation coverage: 82%
 ```
 
 ## :bulb: Additional Information
