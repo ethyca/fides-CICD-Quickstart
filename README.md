@@ -65,10 +65,14 @@ This folder contains the CI job that will perform the migration and perform the 
 
 The example CI job performs the following steps:
   1. **Checkout:** Retrieves the source code for the repository using the actions/checkout action. 
+
   2. **Set up Python:** Sets up the Python environment using the actions/setup-python action, specifying Python version 3.10.
+
   3. **Install Fides:**  Installs the `ethyca-fides` library with version 2.12.0 using the `pip install` command.
+
   4. **Run Database Migrations:** Executes a Python script (`db_migration.py`) responsible for running database migrations against our fictional database for CookieHouse.
-  5. **Scan Database and Validate that all fields are Accounted for:** This is the first step to validate that you are in compliance. The `fides --local scan dataset db` command checks to see if any net-new fields were introduced into the database but weren't annotated in `cookiehouse_core.yml`. This outputs a report that shows what is missing and what your percent privacy coverage is. An example report is below:
+
+  5. **Scan Database and Validate that all fields are Accounted for:** This is the first step to validate that you are in compliance. The `fides --local scan dataset db` command checks to see if any net-new fields were introduced into the database but weren't annotated in `cookiehouse_core.yml`. This outputs a report that shows what is missing and what your percent privacy coverage is. You can potentially use this for branch protections or keep this as a warning. An example report is below:
 
 ```
 Loading resource manifests from: .fides/
@@ -134,7 +138,9 @@ Executing Policy evaluation(s)...
                                               'data_uses': [ 'provide.service']}}]}
 ```
   
-  
+**A few things to note:**
+  1. You can customize this flow to match your organization's needs 
+  2. Consider using some of these checks as branch protections to prevent PRs from being merged in that are not compliant. 
 
 ## :bulb: Additional Information
 
