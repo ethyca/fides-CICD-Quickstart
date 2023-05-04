@@ -79,17 +79,59 @@ Successfully scanned the following datasets:
 	public
 
 The following fields are missing data category annotations:
-	public.users.name
+ public.users.name
  public.users.phone
  public.orders.billingAddress
 
 Annotation coverage: 82%
 ```
 
-  6. **Evaluation:** Performs a Privacy Policy Evaluation using Fides. This step runs the command `fides --local evaluate` and the evaluation process uses the `policy.yml` to validate that data annotated in `cookiehouse_core.yml` are compliant. An Example output is shown below:
+  6. **Evaluation:** Performs a Privacy Policy Evaluation using Fides. This step runs the command `fides --local evaluate` and the evaluation process uses the `policy.yml` to validate that data annotated in `cookiehouse_core.yml` are compliant. An Example output with a violation on `user.date_of_birth` is shown below:
 
 ```
-
+Loaded config from: .fides/fides.toml
+Loading resource manifests from: .fides/
+Taxonomy successfully created.
+----------
+Processing organization resource(s)...
+WOULD CREATE 0 organization resource(s).
+WOULD UPDATE 1 organization resource(s).
+----------
+Processing system resource(s)...
+WOULD CREATE 0 system resource(s).
+WOULD UPDATE 4 system resource(s).
+----------
+Processing policy resource(s)...
+WOULD CREATE 0 policy resource(s).
+WOULD UPDATE 1 policy resource(s).
+----------
+Processing dataset resource(s)...
+WOULD CREATE 0 dataset resource(s).
+WOULD UPDATE 5 dataset resource(s).
+----------
+Loading resource manifests from: .fides/
+Taxonomy successfully created.
+Evaluating the following policies:
+- webapp_data_policy
+----------
+Checking for missing resources...
+Executing Policy evaluation(s)...
+{ 'fides_key': '54bfd260_1665_42aa_97a4_89fd3af395d8',
+  'message': None,
+  'status': <StatusEnum.FAIL: 'FAIL'>,
+  'violations': [ { 'detail': 'Declaration (Storing customer data) of system '
+                              '(CookieHouse_Core) failed rule (Reject '
+                              'Sensitive Data) from policy '
+                              '(webapp_data_policy) for dataset field (DOB). '
+                              'Violated usage of data categories '
+                              '(user.date_of_birth) with qualifier '
+                              '(aggregated.anonymized.unlinked_pseudonymized.pseudonymized.identified) '
+                              'for data uses (provide.service) and subjects '
+                              '(customer)',
+                    'violating_attributes': { 'data_categories': [ 'user.date_of_birth'],
+                                              'data_qualifier': 'aggregated.anonymized.unlinked_pseudonymized.pseudonymized.identified',
+                                              'data_subjects': ['customer'],
+                                              'data_uses': [ 'provide.service']}}]}
 ```
   
   
