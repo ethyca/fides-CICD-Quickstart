@@ -63,7 +63,7 @@ jobs:
 
       # Set up the data in the database
       - name: Run Database Migrations
-        run: python db_migrations.py
+        run: python db_migration.py
 
       # We pureposefully show errors/missed columns here
       - name: Scan Database and Validate that all Fields are Accounted for
