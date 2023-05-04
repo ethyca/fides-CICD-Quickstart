@@ -1,0 +1,33 @@
+policy:
+- fides_key: webapp_data_policy
+  organization_fides_key: default_organization
+  tags: null
+  name: Webapp Privacy Policy
+  description: A privacy policy for the example Web app
+  rules:
+  - name: Reject Sensitive Data
+    data_categories:
+      matches: ANY
+      values:
+      - user.biometric_health
+      - user.genetic
+      - user.health_and_medical
+      - user.political_opinion
+      - user.race
+      - user.religious_belief
+      - user.date_of_birth
+    data_uses:
+      matches: ANY
+      values:
+      - provide
+      - improve
+      - personalize
+      - advertising
+      - third_party_sharing
+      - collect
+      - train_ai_system
+    data_subjects:
+      matches: ANY
+      values:
+      - customer
+    data_qualifier: aggregated

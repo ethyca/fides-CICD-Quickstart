@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+
+jobs:
+  fides_checks:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: sample_db
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+      # For the purposes of this example, we are hosting a Fides Server in this CI job
+      # In a production environment, this service would not be here and an end user would point 
+      # the Fides Scan and Fides evaluate commands to a production instance hosted elsewhere. 
+      # postgresfides:
+      #   image: postgres:latest
+      #   env:
+      #     POSTGRES_USER: postgres
+      #     POSTGRES_PASSWORD: postgres
+      #     POSTGRES_DB: fides
+      #   ports:
+      #     - 5432:5432
+      #   options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+      
+      
+      # fides:
+      #   image: ethyca/fides
+      #   env:
+      #     FIDES__DATABASE__SERVER: postgresfides
+      #     FIDES__DATABASE__USER: postgres
+      #     FIDES__DATABASE__PASSWORD: postgres
+      #     FIDES__DATABASE__PORT: 5432
+      #     FIDES__DATABASE__DB: fides
+      #     FIDES__SECURITY__APP_ENCRYPTION_KEY: OLMkv91j8DHiDAULnK5Lxx3kSCov30b3
+      #     FIDES__SECURITY__OAUTH_ROOT_CLIENT_ID: cicdclient
+      #     FIDES__SECURITY__OAUTH_ROOT_CLIENT_SECRET: cicdsecret
+      #   ports:
+      #     - 8080:8080
+      #   options: --health-cmd "curl --fail http://localhost:8080/health || exit 1" --health-interval 10s --health-timeout 10s --health-retries 10
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+
+      - name: Install Fides
+        run: pip install ethyca-fides==2.12.0
+
+      # Set up the data in the database
+      - name: Run Database Migrations
+        run: python db_migration.py
+
+      # We pureposefully show errors/missed columns here
+      - name: Scan Database and Validate that all Fields are Accounted for
+        continue-on-error: true
+        run: fides --local scan dataset db --connection-string postgresql://postgres:postgres@localhost:5432/sample_db
+
+      # For what is covered, show that the evaluation is passing
+      # The CLI defaults to looking in the '.fides' dir for resources
+      - name: Evaluation
+        run: fides --local evaluate
