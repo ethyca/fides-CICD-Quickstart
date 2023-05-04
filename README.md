@@ -21,17 +21,40 @@ The Fides platform is designed to help organizations manage and fulfill Data Map
 * [Docker](https://www.docker.com/products/docker-desktop) (version 20.10.11 or later)
 * [Python](https://www.python.org/downloads/) (version 3.8 through 3.10)
 
-#### Repo Structure
+## :books: How this works
 
-1. `.fides` - This folder acts as a place where all Fides and repo specific configurations live. This can include the Database privacy declarations (`cookiehouse_core.yml`), the initial fides configurations (`fides.toml`), and a codified version of your privacy policy (`policy.yml`).
+### Repository Structure
 
-2.
+#### .fides - The `.fides` folder is required for each repository for privacy checks.
+
+ This folder acts as a place where all Fides and repo specific configurations live. This can include:
+  1. The Database Privacy Declarations known as a [Dataset](https://docs.ethyca.com/fides/dsr_quickstart/dsr_support/datasets)  (`cookiehouse_core.yml`). This can be autocompleted using Fide's AI Classification tools or an empty skeleton can be generated using [Fides Generate](https://docs.ethyca.com/fides/cli_support/generate_resources#command-line)
+  2. The initial fides configurations (`fides.toml`)
+  3. A codified version of your privacy policy (`policy.yml`)
+  
+The privacy declarations and privacy policy use [FidesLang Taxonomy](https://ethyca.github.io/fideslang/explorer/), the universal privacy language of the web!
+
+#### .github/workflows - This contains the CI job that will perform the migration and perform the privacy checks
+
+The example CI job performs the following steps:
+  1. **Checkout:** Retrieves the source code for the repository using the actions/checkout action. 
+  2. **Set up Python:** Sets up the Python environment using the actions/setup-python action, specifying Python version 3.10.
+  3. **Install Fides:**  Installs the `ethyca-fides` library with version 2.12.0 using the `pip install` command.
+  4. **Run Database Migrations:** Executes a Python script (`db_migration.py`) responsible for running database migrations against our fictional database for CookieHouse.
+  5. **Scan Database and Validate that all fields are Accounted for:** This is the first step to validate that you are in compliance. The `fides --local scan dataset db` command checks to see if any net-new fields were introduced into the database but weren't annotated in `cookiehouse_core.yml`. This outputs a report that shows what is missing and what your percent privacy coverage is. An example report is below:
+
+```
+
+```
+
+## :bulb: Additional Information
 
 ### Documentation
 
 For more information on getting started with Fides, how to configure and set up Fides, and more about the Fides ecosystem of open source projects:
 
 * Documentation: <https://docs.ethyca.com>
+* Taxonomy: <https://ethyca.github.io/fideslang/explorer/>
 * Website: www.ethyca.com/fides
 
 ### Support
