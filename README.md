@@ -6,9 +6,9 @@
 
 Fides (pronounced */fee-dhez/*, from Latin: Fidēs) is an open-source privacy engineering platform for managing the fulfillment of data privacy requests in your runtime environment, and the enforcement of privacy regulations in your code.
 
-## :rocket: Turnkey Quick Start
+## :rocket: Turnkey Quickstart
 
-### Getting Started 
+### Getting Started
 
 This repository provides a comprehensive example of a fictional ecommerce site for a CookieHouse, showcasing how Fides can be integrated into CI/CD pipelines to ensure privacy and regulatory compliance. The example consists of a turn-key solution, demonstrating the full process from building a database in CI to performing migrations against it. The CookieHouse example serves as a practical guide to understand how Fides can be applied in real-world scenarios.
 
@@ -18,14 +18,14 @@ The Fides platform is designed to help organizations manage and fulfill Data Map
 
 #### Minimum requirements
 
-* [Docker](https://www.docker.com/products/docker-desktop) (version 20.10.11 or later)
+* [Docker](https://www.docker.com/products/docker-desktop) (version 20.10.11 or later, must include Docker Compose)
 * [Python](https://www.python.org/downloads/) (version 3.8 through 3.10)
 
 ## :books: How this works
 
 ### Repository Structure
 
-```
+```txt
 .
 ├── .fides
 │   ├── cookiehouse_core.yml
@@ -44,27 +44,30 @@ The Fides platform is designed to help organizations manage and fulfill Data Map
 ```
 
 ### .fides
+
 ------
 
-
-The `.fides` folder is required for each repository for privacy checks.
+The `.fides` directory is generally required for privacy checks within each repo. While another directory may be specific, `.fides` is the default expected path for Fides-related resources.
 
 This folder acts as a place where all Fides and repo specific configurations live. This can include:
-  1. The Database Privacy Declarations known as a [Dataset](https://docs.ethyca.com/fides/dsr_quickstart/dsr_support/datasets)  (`cookiehouse_core.yml`). This can be autocompleted using Fide's AI Classification tools or an empty skeleton can be generated using [Fides Generate](https://docs.ethyca.com/fides/cli_support/generate_resources#command-line)
 
-  2. The initial fides configurations (`fides.toml`)
+  1. The Database Privacy Declarations known as a [Dataset](https://docs.ethyca.com/fides/dsr_quickstart/dsr_support/datasets)  (`cookiehouse_core.yml`). This can be autocompleted using Fides's AI Classification tools or an empty skeleton can be generated using [Fides Generate](https://docs.ethyca.com/fides/cli_support/generate_resources#command-line)
+
+  2. The initial Fides configurations (`fides.toml`)
 
   3. A codified version of your privacy policy (`policy.yml`)
   
 The privacy declarations and privacy policy use [FidesLang Taxonomy](https://ethyca.github.io/fideslang/explorer/), the universal privacy language of the web!
 
 ### .github/workflows
+
 ------
 
-This folder contains the CI job that will perform the migration and perform the privacy checks
+This folder contains the CI job that will perform the sample database migration and perform the privacy checks.
 
 The example CI job performs the following steps:
-  1. **Checkout:** Retrieves the source code for the repository using the actions/checkout action. 
+
+  1. **Checkout:** Retrieves the source code for the repository using the actions/checkout action.
 
   2. **Set up Python:** Sets up the Python environment using the actions/setup-python action, specifying Python version 3.10.
 
@@ -74,7 +77,7 @@ The example CI job performs the following steps:
 
   5. **Scan Database and Validate that all fields are Accounted for:** This is the first step to validate that you are in compliance. The `fides --local scan dataset db` command checks to see if any net-new fields were introduced into the database but weren't annotated in `cookiehouse_core.yml`. This outputs a report that shows what is missing and what your percent privacy coverage is. You can potentially use this for branch protections or keep this as a warning. An example report is below:
 
-```
+```sh
 Loading resource manifests from: .fides/
 Taxonomy successfully created.
 Loaded the following dataset manifests:
@@ -92,7 +95,7 @@ Annotation coverage: 82%
 
   6. **Evaluation:** Performs a Privacy Policy Evaluation using Fides. This step runs the command `fides --local evaluate` and the evaluation process uses the `policy.yml` to validate that data annotated in `cookiehouse_core.yml` are compliant. An Example output with a violation on `user.date_of_birth` is shown below:
 
-```
+```sh
 Loaded config from: .fides/fides.toml
 Loading resource manifests from: .fides/
 Taxonomy successfully created.
@@ -139,8 +142,9 @@ Executing Policy evaluation(s)...
 ```
   
 **A few things to note:**
-  1. You can customize this flow to match your organization's needs 
-  2. Consider using some of these checks as branch protections to prevent PRs from being merged in that are not compliant. 
+
+  1. You can customize this flow to match your organization's needs.
+  2. Consider using some of these checks as branch protections to prevent PRs from being merged in that are not compliant with your privacy policy(ies).
 
 ## :bulb: Additional Information
 
@@ -150,7 +154,7 @@ For more information on getting started with Fides, how to configure and set up 
 
 * Documentation: <https://docs.ethyca.com>
 * Taxonomy: <https://ethyca.github.io/fideslang/explorer/>
-* Website: www.ethyca.com/fides
+* Website: <https://docs.ethyca.com/fides/overview>
 
 ### Support
 
@@ -169,23 +173,6 @@ Read about the [Fides community](https://docs.ethyca.com/fides/community/hints_t
 ## :balance_scale: License
 
 The [Fides](https://github.com/ethyca/fides) ecosystem of tools are licensed under the [Apache Software License Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
-Fides tools are built on [fideslang](https://github.com/ethyca/privacy-taxonomy), the Fides language specification, which is licensed under [CC by 4](https://github.com/ethyca/privacy-taxonomy/blob/main/LICENSE).
+Fides tools are built on [Fideslang](https://github.com/ethyca/privacy-taxonomy), the Fides language specification, which is licensed under [CC by 4](https://github.com/ethyca/privacy-taxonomy/blob/main/LICENSE).
 
 Fides is created and sponsored by Ethyca: a developer tools company building the trust infrastructure of the internet. If you have questions or need assistance getting started, let us know at fides@ethyca.com!
-
-[release-image]: https://img.shields.io/github/release/ethyca/fides.svg
-[release-url]: https://github.com/ethyca/fides/releases
-[docker-workflow-image]: https://github.com/ethyca/fides/workflows/Docker%20Build%20&%20Push/badge.svg
-[docs-workflow-image]: https://github.com/ethyca/fides/workflows/Publish%20Docs/badge.svg
-[release-workflow-image]: https://github.com/ethyca/fides/actions/workflows/publish_package.yaml/badge.svg
-[docker-actions-url]: https://github.com/ethyca/fides/actions/workflows/publish_docker.yaml
-[docs-actions-url]: https://github.com/ethyca/fides/actions/workflows/publish_docs.yaml
-[publish-actions-url]: https://github.com/ethyca/fides/actions/workflows/publish_package.yaml
-[license-image]: https://img.shields.io/:license-Apache%202-blue.svg
-[license-url]: https://www.apache.org/licenses/LICENSE-2.0.txt
-[black-image]: https://img.shields.io/badge/code%20style-black-000000.svg
-[black-url]: https://github.com/psf/black/
-[mypy-image]: http://www.mypy-lang.org/static/mypy_badge.svg
-[mypy-url]: http://mypy-lang.org/
-[twitter-image]: https://img.shields.io/twitter/follow/ethyca?style=social
-[twitter-url]: https://twitter.com/ethyca
