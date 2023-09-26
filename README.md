@@ -91,7 +91,7 @@ The following fields are missing data category annotations:
 Annotation coverage: 82%
 ```
 
-  6. **Evaluation:** Performs a Privacy Policy Evaluation using Fides. This step runs the command `fides --local evaluate` and the evaluation process uses the `policy.yml` to validate that data annotated in `cookiehouse_core.yml` are compliant. An Example output with a violation on `user.date_of_birth` is shown below:
+  6. **Evaluation:** Performs a Privacy Policy Evaluation using Fides. This step runs the command `fides --local evaluate` and the evaluation process uses the `policy.yml` to validate that data annotated in `cookiehouse_core.yml` are compliant. An Example output with a violation on `user.demographic.date_of_birth` is shown below:
 
 ```sh
 Loaded config from: .fides/fides.toml
@@ -129,14 +129,14 @@ Executing Policy evaluation(s)...
                               'Sensitive Data) from policy '
                               '(webapp_data_policy) for dataset field (DOB). '
                               'Violated usage of data categories '
-                              '(user.date_of_birth) with qualifier '
+                              '(user.demographic.date_of_birth) with qualifier '
                               '(aggregated.anonymized.unlinked_pseudonymized.pseudonymized.identified) '
-                              'for data uses (provide.service) and subjects '
+                              'for data uses (functional) and subjects '
                               '(customer)',
-                    'violating_attributes': { 'data_categories': [ 'user.date_of_birth'],
+                    'violating_attributes': { 'data_categories': [ 'user.demographic.date_of_birth'],
                                               'data_qualifier': 'aggregated.anonymized.unlinked_pseudonymized.pseudonymized.identified',
                                               'data_subjects': ['customer'],
-                                              'data_uses': [ 'provide.service']}}]}
+                                              'data_uses': [ 'functional']}}]}
 ```
   
 **A few things to note:**
