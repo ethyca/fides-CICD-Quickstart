@@ -19,10 +19,9 @@ policy:
     data_uses:
       matches: ANY
       values:
-      - provide
-      - improve
+      - functional
       - personalize
-      - advertising
+      - marketing.advertising
       - third_party_sharing
       - collect
       - train_ai_system
