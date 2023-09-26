@@ -12,8 +12,6 @@ Fides (pronounced */fee-dhez/*, from Latin: Fidēs) is an open-source privacy en
 
 This repository provides a comprehensive example of a fictional ecommerce site for a CookieHouse, showcasing how Fides can be integrated into CI/CD pipelines to ensure privacy and regulatory compliance. The example consists of a turn-key solution, demonstrating the full process from building a database in CI to performing migrations against it. The CookieHouse example serves as a practical guide to understand how Fides can be applied in real-world scenarios.
 
-In addition to this turn-key example, another repository will be available as a lab to help users set up their own CI/CD pipelines using Fides. By following the lab, you can learn how to establish a CI/CD pipeline tailored to your specific requirements while ensuring that privacy regulations are enforced in your code.
-
 The Fides platform is designed to help organizations manage and fulfill Data Mapping, Consent, and Data Privacy Requests while staying compliant with various privacy regulations. By using Fides in your CI/CD pipeline, you can ensure that your company remains compliant, reducing the risk of privacy breaches and potential fines.
 
 #### Minimum requirements
@@ -71,7 +69,7 @@ The example CI job performs the following steps:
 
   2. **Set up Python:** Sets up the Python environment using the actions/setup-python action, specifying Python version 3.10.
 
-  3. **Install Fides:**  Installs the `ethyca-fides` library with version 2.12.0 using the `pip install` command.
+  3. **Install Fides:**  Installs the `ethyca-fides` library with version 2.20.1 using the `pip install` command.
 
   4. **Run Database Migrations:** Executes a Python script (`db_migration.py`) responsible for running database migrations against our fictional database for CookieHouse.
 
@@ -93,7 +91,7 @@ The following fields are missing data category annotations:
 Annotation coverage: 82%
 ```
 
-  6. **Evaluation:** Performs a Privacy Policy Evaluation using Fides. This step runs the command `fides --local evaluate` and the evaluation process uses the `policy.yml` to validate that data annotated in `cookiehouse_core.yml` are compliant. An Example output with a violation on `user.date_of_birth` is shown below:
+  6. **Evaluation:** Performs a Privacy Policy Evaluation using Fides. This step runs the command `fides --local evaluate` and the evaluation process uses the `policy.yml` to validate that data annotated in `cookiehouse_core.yml` are compliant. An Example output with a violation on `user.demographic.date_of_birth` is shown below:
 
 ```sh
 Loaded config from: .fides/fides.toml
@@ -131,14 +129,14 @@ Executing Policy evaluation(s)...
                               'Sensitive Data) from policy '
                               '(webapp_data_policy) for dataset field (DOB). '
                               'Violated usage of data categories '
-                              '(user.date_of_birth) with qualifier '
+                              '(user.demographic.date_of_birth) with qualifier '
                               '(aggregated.anonymized.unlinked_pseudonymized.pseudonymized.identified) '
-                              'for data uses (provide.service) and subjects '
+                              'for data uses (functional) and subjects '
                               '(customer)',
-                    'violating_attributes': { 'data_categories': [ 'user.date_of_birth'],
+                    'violating_attributes': { 'data_categories': [ 'user.demographic.date_of_birth'],
                                               'data_qualifier': 'aggregated.anonymized.unlinked_pseudonymized.pseudonymized.identified',
                                               'data_subjects': ['customer'],
-                                              'data_uses': [ 'provide.service']}}]}
+                                              'data_uses': [ 'functional']}}]}
 ```
   
 **A few things to note:**

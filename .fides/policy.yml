@@ -9,20 +9,19 @@ policy:
     data_categories:
       matches: ANY
       values:
-      - user.biometric_health
-      - user.genetic
+      - user.biometric.health
+      - user.health_and_medical.genetic
       - user.health_and_medical
-      - user.political_opinion
-      - user.race
-      - user.religious_belief
-      - user.date_of_birth
+      - user.demographic.political_opinion
+      - user.demographic.race_ethnicity
+      - user.demographic.religious_belief
+      - user.demographic.date_of_birth
     data_uses:
       matches: ANY
       values:
-      - provide
-      - improve
+      - functional
       - personalize
-      - advertising
+      - marketing.advertising
       - third_party_sharing
       - collect
       - train_ai_system
